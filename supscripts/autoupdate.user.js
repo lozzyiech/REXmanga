@@ -3,7 +3,8 @@
 // @version      1.0
 // @description  Автообновление скрипта
 // @author       ikuza47
-// @match        *://*/*
+// @match        https://remanga.org/*
+// @match        http://remanga.org/*
 // @grant        none
 // ==/UserScript==
 (function() {
