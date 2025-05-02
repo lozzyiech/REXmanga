@@ -11,7 +11,7 @@
 const REXconfig = {
     button: {
         color: "#1A1B1E",
-        svgContent: GM_getResourceText('buttonIcon'), // Получаем содержимое SVG
+        svgContent: GM_getResourceText(buttonIcon), // Получаем содержимое SVG
         size: "40px",
         position: {
             left: "20px",
