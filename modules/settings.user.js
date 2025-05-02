@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         REXmanga Settings Panel
 // @namespace    https://github.com/lozzyiech/REXmanga
-// @version      2.1
+// @version      2.3
 // @description  Панель настроек для remanga.org
 // @author       ikuza47
 // @match        https://remanga.org/*
@@ -21,29 +21,21 @@
             this.init();
         }
 
-        loadSettings() {
-            return {
-                ...REXconfig.defaults,
-                ...JSON.parse(GM_getValue('rex-settings', '{}'))
-            };
-        }
-
-        init() {
-            this.createButton();
-            this.applyStyles();
-        }
-
         createButton() {
             const btn = document.createElement('div');
             btn.id = 'rex-settings-btn';
-            btn.innerHTML = REXconfig.button.svg;
+            
+            // Вставляем SVG содержимое
+            btn.innerHTML = REXconfig.button.svgContent;
+            
+            // Стили для контейнера
             btn.style.cssText = `
                 position: fixed;
                 left: ${REXconfig.button.position.left};
                 bottom: ${REXconfig.button.position.bottom};
-                width: 40px;
-                height: 40px;
-                background: ${REXconfig.button.color};
+                width: ${REXconfig.button.size};
+                height: ${REXconfig.button.size};
+                background-color: ${REXconfig.button.color};
                 border-radius: 50%;
                 cursor: pointer;
                 display: flex;
@@ -54,10 +46,17 @@
                 transition: all 0.3s ease;
             `;
 
+            // Стили для SVG внутри кнопки
+            const svg = btn.querySelector('svg');
+            if (svg) {
+                svg.style.width = '24px';
+                svg.style.height = '24px';
+            }
+
             btn.addEventListener('click', () => this.togglePanel());
             document.body.appendChild(btn);
         }
-        
+
         // ...остальные методы без изменений
     }
 
