@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         REXmanga Settings
 // @namespace    https://github.com/lozzyiech/REXmanga
-// @version      1.0
+// @version      1.1
 // @description  Настройки интерфейса для remanga.org
 // @author       ikuza47
 // @match        https://remanga.org/*
@@ -32,8 +32,8 @@
             button.innerHTML = settingsData.buttonSVG;
             button.style.cssText = `
                 position: fixed;
-                top: 20px;
-                right: 20px;
+                left: 20px;
+                bottom: 20px;
                 width: 40px;
                 height: 40px;
                 background-color: ${settingsData.buttonColor};
@@ -44,7 +44,16 @@
                 justify-content: center;
                 z-index: 9999;
                 box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                transition: transform 0.2s;
             `;
+
+            // Эффект при наведении
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'scale(1.1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
 
             button.addEventListener('click', () => {
                 this.toggleSettingsPanel();
