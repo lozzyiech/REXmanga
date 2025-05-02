@@ -6,6 +6,7 @@
 // @match        *://*/*
 // @grant        none
 // ==/UserScript==
-
-console.log('[AutoUpdate] SPA navigation detected');
-
+(function() {
+  'use strict';
+  console.log('[AutoUpdate] SPA navigation detected');
+})();
