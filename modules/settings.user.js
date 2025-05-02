@@ -15,6 +15,7 @@
 
 (function() {
     'use strict';
+    console.log('Settings - load');
 
     const settingsData = JSON.parse(GM_getResourceText('settingsData'));
 

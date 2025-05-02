@@ -13,6 +13,7 @@
 
 (function() {
     'use strict';
+    console.log('Main - load');
     
     const REXmanga = {
         init: function() {
