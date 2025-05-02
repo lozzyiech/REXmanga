@@ -1,75 +1,67 @@
 // ==UserScript==
-// @name         REXmanga Settings
+// @name         REXmanga Settings Panel
 // @namespace    https://github.com/lozzyiech/REXmanga
-// @version      1.1
-// @description  Настройки интерфейса для remanga.org
+// @version      2.1
+// @description  Панель настроек для remanga.org
 // @author       ikuza47
 // @match        https://remanga.org/*
 // @match        http://remanga.org/*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_addStyle
-// @grant        GM_getResourceText
-// @resource     settingsData https://github.com/lozzyiech/REXmanga/raw/main/modules/data/settings.json
+// @require      https://github.com/lozzyiech/REXmanga/raw/main/modules/data/config.user.js
 // ==/UserScript==
 
 (function() {
     'use strict';
-    console.log('Settings - load');
 
-    const settingsData = JSON.parse(GM_getResourceText('settingsData'));
-
-    class SettingsManager {
+    class SettingsPanel {
         constructor() {
+            this.settings = this.loadSettings();
             this.init();
         }
 
-        init() {
-            this.injectSettingsButton();
+        loadSettings() {
+            return {
+                ...REXconfig.defaults,
+                ...JSON.parse(GM_getValue('rex-settings', '{}'))
+            };
         }
 
-        injectSettingsButton() {
-            const button = document.createElement('div');
-            button.innerHTML = settingsData.buttonSVG;
-            button.style.cssText = `
+        init() {
+            this.createButton();
+            this.applyStyles();
+        }
+
+        createButton() {
+            const btn = document.createElement('div');
+            btn.id = 'rex-settings-btn';
+            btn.innerHTML = REXconfig.button.svg;
+            btn.style.cssText = `
                 position: fixed;
-                left: 20px;
-                bottom: 20px;
+                left: ${REXconfig.button.position.left};
+                bottom: ${REXconfig.button.position.bottom};
                 width: 40px;
                 height: 40px;
-                background-color: ${settingsData.buttonColor};
+                background: ${REXconfig.button.color};
                 border-radius: 50%;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 z-index: 9999;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                transition: transform 0.2s;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                transition: all 0.3s ease;
             `;
 
-            // Эффект при наведении
-            button.addEventListener('mouseenter', () => {
-                button.style.transform = 'scale(1.1)';
-            });
-            button.addEventListener('mouseleave', () => {
-                button.style.transform = 'scale(1)';
-            });
-
-            button.addEventListener('click', () => {
-                this.toggleSettingsPanel();
-            });
-
-            document.body.appendChild(button);
+            btn.addEventListener('click', () => this.togglePanel());
+            document.body.appendChild(btn);
         }
-
-        toggleSettingsPanel() {
-            console.log('Settings panel toggled');
-            // Логика панели настроек будет здесь
-        }
+        
+        // ...остальные методы без изменений
     }
 
-    if (window.location.hostname.includes('remanga.org')) {
-        new SettingsManager();
+    if (/remanga\.org/i.test(location.hostname)) {
+        new SettingsPanel();
     }
 })();

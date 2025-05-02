@@ -8,13 +8,14 @@
 // @match        http://remanga.org/*
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @require      https://github.com/lozzyiech/REXmanga/raw/main/modules/Settings.user.js
+// @require https://github.com/lozzyiech/REXmanga/raw/main/modules/data/config.user.js
+// @require      https://github.com/lozzyiech/REXmanga/raw/main/modules/settings.user.js
 // ==/UserScript==
 
 (function() {
     'use strict';
     console.log('Main - load');
-    
+
     const REXmanga = {
         init: function() {
             if (typeof REXmanga.Settings !== 'undefined') {
@@ -22,7 +23,7 @@
             }
         }
     };
-    
+
     window.REXmanga = REXmanga;
     REXmanga.init();
 })();
