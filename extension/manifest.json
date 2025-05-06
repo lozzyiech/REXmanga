@@ -4,14 +4,14 @@
     "version": "1.0",
     "description": "Расширение для сайта remanga.org",
 
-    
     "content_scripts": [
         {
             "matches": ["https://remanga.org/*"],
-            "js": ["content.js"]
+            "js": ["content.js", "redirectbutton.js"], 
+            "css": ["styles/style.css"]
         }
     ],
-    
+
     "permissions": ["scripting", "unlimitedStorage"],
 
     "action": {

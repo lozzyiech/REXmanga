@@ -1,0 +1,32 @@
+:root {
+    --primary-color: #007bff; 
+    --additional-color: #1a1b1e;
+    --white-color: #FEFEFE; 
+    --black-color: black; 
+    }
+
+.ex-button {
+    position: fixed; /* Ensure the button is fixed in place */
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--additional-color); /* Use CSS variable for background color */
+    color: var(--white-color); /* Use CSS variable for text color */
+    border: var(--border-color); /* Use CSS variable for border */
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10000; /* Ensure the button is above other content */
+}
+
+#redirect-button {
+    position: fixed; /* Ensure the button is fixed in place */
+    top: 70px;
+    right: 70px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color); /* Use CSS variable for background color */
+    color: var(--white-color); /* Use CSS variable for text color */
+}
